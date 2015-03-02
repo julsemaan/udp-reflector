@@ -201,8 +201,8 @@ void create_socket()
         destination_points[i].dest_sock_addr.sin_family = AF_INET;
         destination_points[i].dest_sock_addr.sin_port = htons(
                 destination_points[i].dest_port);
-        strncpy((char *) &destination_points[i].dest_sock_addr.sin_addr,
-                (char *) dest_host_info->h_addr, dest_host_info->h_length);
+		struct in_addr **addr_list = (struct in_addr **)dest_host_info->h_addr_list; 
+		memcpy( &destination_points[i].dest_sock_addr.sin_addr.s_addr, &(addr_list[0]->s_addr),4); 
 
         if (verbose_debug)
         {
